@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Portfolio Yessica</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- NAV -->
+  <div class="nav">
+    <button data-target="home" class="active">Home</button>
+    <button data-target="skill">Skill</button>
+    <button data-target="certificates">Certificates</button>
+    <button data-target="contact">Contact</button>
+  </div>
+
+  <div class="container">
+
+    <!-- HOME -->
+    <section id="home" class="page active">
+      <div class="hero">
+        <div class="text">
+          <h1>Hello I'm <span>Yessica</span><br><small style="color:var(--muted)">Romantika Helena</small></h1>
+          <p>Pelajar SMK jurusan Teknik Komputer dan Jaringan yang fokus pada penguasaan teknologi dan pengembangan keterampilan IT.</p>
+          <button class="btn">Download CV</button>
+        </div>
+        <div class="photo">
+          <img src="assets/profile_yessica/foto_yessica.jpg" alt="Yessica">
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILL -->
+    <section id="skill" class="page">
+      <h2>Skill</h2>
+      <div class="skill-grid">
+        <div class="skill-card">
+          <h3>Debian</h3>
+          <ul>
+            <li>Perintah dasar</li>
+            <li>DNS Server</li>
+            <li>Web Server Apache</li>
+            <li>FTP Server</li>
+            <li>Setting DNS</li>
+          </ul>
+        </div>
+
+        <div class="skill-card">
+          <h3>Mikrotik</h3>
+          <ul>
+            <li>Router Gateway</li>
+            <li>Wireless Fidelity</li>
+            <li>Hotspot Setup</li>
+            <li>Firewall & NAT Rules</li>
+          </ul>
+        </div>
+
+        <div class="skill-card">
+          <h3>Networking (Cisco)</h3>
+          <ul>
+            <li>Subnetting</li>
+            <li>Vlan Trunking</li>
+            <li>Static & Dynamic Routing</li>
+          </ul>
+        </div>
+
+        <div class="skill-card">
+          <h3>Soft Skills</h3>
+          <ul>
+            <li>Problem Solving</li>
+            <li>Teamwork</li>
+            <li>Responsibility</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- CERTIFICATES -->
+    <section id="certificates" class="page">
+      <h2>Certificates</h2>
+      <div id="cert-tabs">
+        <button class="btn active" data-cert="aguna">Aguna</button>
+        <button class="btn" data-cert="fortinet">Fortinet</button>
+        <button class="btn" data-cert="linkedin">LinkedIn</button>
+        <button class="btn" data-cert="idn">IDN</button>
+      </div>
+      <div class="cert-grid" id="cert-grid"></div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="page">
+      <h2>Contact</h2>
+      <div class="contact-card">
+        <h4 style="color:#ccbedb;"><b>Jangan ragu untuk menghubungi saya melalui kontak atau media sosial di bawah ini:</b></h4>
+        <ul>
+          <li>WhatsApp: <strong>+62 856 4330 3909</strong></li>
+          <li>Email: <strong>yessicahelena01@gmail.com</strong></li>
+          <li>Instagram: <strong>@yessicatikaa</strong></li>
+        </ul>
+      </div>
+    </section>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

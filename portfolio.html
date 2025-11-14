@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Portfolio Yessica</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  :root{
+    --bg1:#16002b;
+    --bg2:#2c0a57;
+    --accent:#b980ff;
+    --accent2:#8b48d7;
+    --muted:#d8c7f7;
+    --card:#251045;
+  }
+  body{
+    font-family:"Poppins",sans-serif;
+    background:linear-gradient(180deg,var(--bg1),var(--bg2));
+    color:white;
+    min-height:100vh;
+    overflow-x:hidden;
+  }
+
+  /* NAVIGATION */
+  .nav{
+    display:flex;
+    justify-content:flex-end;
+    gap:20px;
+    padding:20px 60px;
+    position:sticky;top:0;
+    background:rgba(20,0,40,0.6);
+    backdrop-filter:blur(10px);
+    z-index:10;
+  }
+  .nav button{
+    background:none;border:none;
+    color:var(--muted);
+    font-size:15px;
+    cursor:pointer;
+    position:relative;
+    padding:8px 14px;
+    transition:color .3s;
+  }
+  .nav button::after{
+    content:"";
+    position:absolute;
+    bottom:0;left:0;
+    width:0;height:2px;
+    background:var(--accent);
+    transition:width .3s;
+  }
+  .nav button:hover{color:#fff;}
+  .nav button:hover::after{width:100%;}
+  .nav button.active{color:#fff;}
+  .nav button.active::after{width:100%;}
+  .nav button.active{
+    text-shadow:0 0 6px var(--accent), 0 0 14px var(--accent2);
+  }
+
+  /* CONTAINER */
+  .container{
+    width:100%;max-width:1000px;margin:auto;padding:40px 20px;
+  }
+
+  /* PAGE */
+  .page{
+    display:none;
+    opacity:0;
+    transform:translateY(10px);
+    transition:all .5s ease;
+  }
+  .page.active{
+    display:block;
+    opacity:1;
+    transform:translateY(0);
+  }
+
+  h2{
+    text-align:center;
+    color:var(--accent);
+    margin-bottom:25px;
+    font-size:28px;
+    text-shadow:0 0 8px rgba(185,128,255,0.5);
+    animation:glowtext 3s ease-in-out infinite alternate;
+  }
+
+  @keyframes glowtext {
+    from{text-shadow:0 0 6px rgba(185,128,255,0.4);}
+    to{text-shadow:0 0 14px rgba(185,128,255,0.8);}
+  }
+
+  /* HERO */
+  .hero{
+    display:flex;align-items:center;justify-content:space-between;
+    gap:30px;flex-wrap:wrap;
+  }
+  .hero .text{max-width:55%;}
+  .hero h1{
+    font-size:38px;margin-bottom:10px;
+    color:#fff;
+    text-shadow:0 0 10px rgba(185,128,255,0.4);
+  }
+  .hero h1 span{color:var(--accent);}
+  .hero p{color:var(--muted);line-height:1.6;margin-bottom:20px;}
+  .photo{
+    width:230px;height:230px;border-radius:50%;
+    overflow:hidden;
+    border:4px solid rgba(185,128,255,0.3);
+    box-shadow:0 0 25px rgba(185,128,255,0.25);
+    animation:softGlow 4s ease-in-out infinite alternate;
+  }
+  @keyframes softGlow{
+    from{box-shadow:0 0 25px rgba(185,128,255,0.2);}
+    to{box-shadow:0 0 40px rgba(185,128,255,0.4);}
+  }
+  .photo img{width:100%;height:100%;object-fit:cover;}
+
+  .btn{
+    padding:10px 18px;
+    border-radius:10px;
+    border:none;
+    background:linear-gradient(90deg,var(--accent),var(--accent2));
+    color:white;
+    font-weight:500;
+    cursor:pointer;
+    box-shadow:0 0 15px rgba(185,128,255,0.4);
+    transition:transform .3s,box-shadow .3s, background 0.5s ease;
+  }
+  .btn:hover{
+    transform:translateY(-3px);
+    box-shadow:0 0 25px rgba(185,128,255,0.6);
+  }
+
+  /* SKILL */
+  .skill-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:20px;
+  }
+  .skill-card{
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(185,128,255,0.15);
+    padding:20px;border-radius:12px;
+    transition:transform .3s,box-shadow .3s;
+  }
+  .skill-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 8px 18px rgba(185,128,255,0.2);
+  }
+  .skill-card h3{color:var(--accent);margin-bottom:10px;}
+
+  /* CERTIFICATES */
+  #cert-tabs{
+    display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:20px;
+  }
+  #cert-tabs .btn{
+    background:linear-gradient(90deg,#3a1768,#2b0b4a);
+    border:1px solid rgba(185,128,255,0.2);
+  }
+  #cert-tabs .btn:hover{
+    background:linear-gradient(90deg,var(--accent),var(--accent2));
+    box-shadow:0 0 20px rgba(185,128,255,0.4);
+  }
+  #cert-tabs .btn.active{
+    background:linear-gradient(270deg,var(--accent),var(--accent2));
+    box-shadow:0 0 25px rgba(185,128,255,0.7);
+    animation:colorShift 3s infinite alternate ease-in-out;
+  }
+  @keyframes colorShift{
+    from{filter:hue-rotate(0deg);}
+    to{filter:hue-rotate(50deg);}
+  }
+
+  .cert-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:15px;
+    opacity:0;
+    transform:scale(0.97);
+    transition:opacity .6s, transform .6s;
+  }
+  .cert-grid.show{
+    opacity:1;
+    transform:scale(1);
+  }
+  .cert{
+    background:var(--card);
+    border-radius:10px;
+    padding:10px;
+    transition:transform .3s, box-shadow .3s;
+  }
+  .cert img {
+  width: 100%;
+  height: auto;
+  max-height: 350px;
+  object-fit: contain;
+  border-radius: 10px;
+  background: #1a0933;
+  display: block;
+  margin: auto;
+}
+  .cert:hover{
+    transform:scale(1.03);
+    box-shadow:0 6px 15px rgba(185,128,255,0.3);
+  }
+
+  /* CONTACT */
+  .contact-card{
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(185,128,255,0.2);
+    padding:25px;border-radius:12px;text-align:center;
+    color:var(--muted);
+  }
+  .contact-card ul{list-style:none;margin-top:10px;line-height:1.8;}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<div class="nav">
+  <button data-target="home" class="active">Home</button>
+  <button data-target="skill">Skill</button>
+  <button data-target="certificates">Certificates</button>
+  <button data-target="contact">Contact</button>
+</div>
+
+<div class="container">
+
+  <!-- HOME -->
+  <section id="home" class="page active">
+    <div class="hero">
+      <div class="text">
+        <h1>Hello I'm <span>Yessica</span><br><small style="color:var(--muted)">Romantika Helena</small></h1>
+        <p>Pelajar SMK jurusan Teknik Komputer dan Jaringan yang fokus pada penguasaan teknologi dan pengembangan keterampilan IT.</p>
+        <button class="btn">Download CV</button>
+      </div>
+      <div class="photo"><img src="assets/profile_yessica/foto_yessica.jpg" alt="Yessica"></div>
+    </div>
+  </section>
+
+  <!-- SKILL -->
+  <section id="skill" class="page">
+    <h2>Skill</h2>
+    <div class="skill-grid">
+      <div class="skill-card"><h3>Debian</h3>
+        <ul>
+        <li>Perintah dasar</li>
+        <li>DNS Server</li>
+        <li>Web Server Apache</li>
+        <li>FTP Server</li>
+        <li>Setting DNS</li>
+      </ul>
+    </div>
+      <div class="skill-card"><h3>Mikrotik</h3><ul><li>Router Gateway</li><li>Wireless Fidelity</li><li>Hotspot Setup</li><li>Firewall & NAT Rules</li></ul></div>
+      <div class="skill-card"><h3>Networking (Cisco)</h3><ul><li>Subnetting</li><li>Vlan Trunking</li><li>Static & Dynamic Routing</li></ul></div>
+      <div class="skill-card"><h3>Soft Skills</h3><ul><li>Problem Solving</li><li>Teamwork</li><li>Responsibility</li></ul></div>
+    </div>
+  </section>
+
+  <!-- CERTIFICATES -->
+  <section id="certificates" class="page">
+    <h2>Certificates</h2>
+    <div id="cert-tabs">
+      <button class="btn active" data-cert="aguna">Aguna</button>
+      <button class="btn" data-cert="fortinet">Fortinet</button>
+      <button class="btn" data-cert="linkedin">LinkedIn</button>
+      <button class="btn" data-cert="idn">IDN</button>
+    </div>
+    <div class="cert-grid" id="cert-grid"></div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="page">
+    <h2>Contact</h2>
+    <div class="contact-card">
+      <h4 style="color:#ccbedb;"><b>Jangan ragu untuk menghubungi saya melalui kontak atau media sosial di bawah ini:</b></h4>
+      <ul>
+        <li>WhatsApp: <strong>+62 856 4330 3909</strong></li>
+        <li>Email: <strong>yessicahelena01@gmail.com</strong></li>
+        <li>Instagram: <strong>@yessicatikaa</strong></li>
+      </ul>
+    </div>
+  </section>
+</div>
+
+<script>
+  // Navigasi antar menu
+  const navButtons=document.querySelectorAll('.nav button');
+  const pages=document.querySelectorAll('.page');
+  navButtons.forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const target=btn.dataset.target;
+      pages.forEach(p=>{
+        p.classList.remove('active');
+        if(p.id===target){
+          setTimeout(()=>p.classList.add('active'),200);
+        }
+      });
+      navButtons.forEach(b=>b.classList.toggle('active',b===btn));
+    });
+  });
+
+  // Data Sertifikat
+const certData = {
+  aguna: [
+    "assets/certificates/Aguna Corse/Certificate aguna1.jpg",
+    "assets/certificates/Aguna Corse/Cerficate Aguna Corse 2.jpg",
+    "assets/certificates/Aguna Corse/Cerficate Aguna Corse 3.jpg",
+    "assets/certificates/Aguna Corse/Certificate Aguna Corse 4.jpg",
+    "assets/certificates/Aguna Corse/Certificate Agua Corse 5.jpg"
+  ],
+  fortinet: [
+    "assets/certificates/Fortinet/Certificate Fortinet 1.jpg",
+    "assets/certificates/Fortinet/Certificate Fortinet 2.jpg"
+  ],
+  idn: [
+    "assets/certificates/IDN/Certificate IDN 1.jpg",
+    "assets/certificates/IDN/Certificate IDN 2.jpg"
+  ],
+  linkedin: [
+    "assets/certificates/Linkedin/certificate linkedin1.jpg"
+  ]
+};
+
+  const certTabs=document.querySelectorAll('#cert-tabs .btn');
+  const certGrid=document.getElementById('cert-grid');
+
+  function loadCertificates(type){
+    certGrid.classList.remove('show');
+    setTimeout(()=>{
+      certGrid.innerHTML=certData[type].map(src=>`<div class="cert"><img src="${src}" alt="${type}"></div>`).join('');
+      certTabs.forEach(btn=>btn.classList.toggle('active',btn.dataset.cert===type));
+      certGrid.classList.add('show');
+    },300);
+  }
+
+  certTabs.forEach(btn=>btn.addEventListener('click',()=>loadCertificates(btn.dataset.cert)));
+  window.addEventListener('load',()=>loadCertificates('aguna'));
+</script>
+
+</body>
+</html>
